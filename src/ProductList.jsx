@@ -263,6 +263,9 @@ const handlePlantsClick = (e) => {
     CartItems.forEach((item)=>total+=item.quantity);
     return total;
   }
+  const isDisabled = (plant)=>{
+    return (CartItems.some(item => item.name === plant.name));
+  }
     return (
         <div>
              <div className="navbar" style={styleObj}>
@@ -293,7 +296,7 @@ const handlePlantsClick = (e) => {
                         <div className='product-card' key={plantIndex}>
                             <img src={plant.image} className="product-image" alt={plant.name}/>
                             <div className='product-title'>{plant.name}</div>
-                            <button className='product-button' onClick={()=>handleAddToCart(plant)}>Add to Cart</button>
+                            <button className={isDisabled(plant)?'product-button-disabled':'product-button'} onClick={()=>handleAddToCart(plant)} disabled={isDisabled(plant)} >Add to Cart</button>
                         </div>
                     ))}
                 </div>
